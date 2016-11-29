@@ -1,0 +1,7 @@
+import todo.Divisa
+
+model {
+	Divisa divisa
+}
+
+json tmpl.divisa(divisa)

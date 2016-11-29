@@ -1,0 +1,111 @@
+package segundo.parcial
+
+import static org.springframework.http.HttpStatus.*
+import grails.transaction.Transactional
+import grails.plugin.springsecurity.annotation.Secured
+@Transactional(readOnly = true)
+@Secured(['ROLE_ADMIN'])
+class DivisaController {
+    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    
+    def index() {
+        respond Divisa.list(params), model:[divisaCount: Divisa.count()]
+    }
+
+    def show(Divisa divisa) {
+        respond divisa
+    }
+
+    def create() {
+        respond new Divisa(params)
+    }
+
+    @Transactional
+    def save(Divisa divisa) {
+        if (divisa == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (divisa.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond divisa.errors, view:'create'
+            return
+        }
+        divisa.version=1
+        divisa.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'divisa.label', default: 'Divisa'), divisa.id])
+                redirect divisa
+            }
+            '*' { respond divisa, [status: CREATED] }
+        }
+
+
+
+//Create the record in DB by sending the needed Select command
+    }
+
+    def edit(Divisa divisa) {
+        respond divisa
+    }
+
+
+      def update(Divisa divisa) {
+        if (divisa == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        if (divisa.hasErrors()) {
+            transactionStatus.setRollbackOnly()
+            respond divisa.errors, view:'edit'
+            return
+        }
+
+        divisa.version=1
+        divisa.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.updated.message', args: [message(code: 'divisa.label', default: 'Divisa'), divisa.id])
+                redirect divisa
+            }
+            '*'{ respond divisa, [status: OK] }
+        }
+    }
+
+    @Transactional
+    def delete(Divisa divisa) {
+
+        if (divisa == null) {
+            transactionStatus.setRollbackOnly()
+            notFound()
+            return
+        }
+
+        divisa.delete flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.deleted.message', args: [message(code: 'divisa.label', default: 'Divisa'), divisa.id])
+                redirect action:"index", method:"GET"
+            }
+            '*'{ render status: NO_CONTENT }
+        }
+    }
+
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'divisa.label', default: 'Divisa'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*'{ render status: NOT_FOUND }
+        }
+    }
+}

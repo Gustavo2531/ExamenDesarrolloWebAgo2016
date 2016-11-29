@@ -1,0 +1,102 @@
+<!--
+Gustavo Francisco Méndez De La Cruz A01332475
+Ivan Islas
+-->
+<!Doctype html>
+<html ng-app="primerApp">
+  <head>
+    <meta charset="utf-8">
+    <title>Crimenes</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="styles/bootstrap.css">
+    <link rel="stylesheet" href="styles/bootstrap-select.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/angular.js"></script> 
+    <script src="scripts/app.js"></script>
+   <script src="scripts/app3.js"></script>
+      
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/bootstrap.js"></script>
+    <script src="scripts/bootstrap-select.js"></script>
+ <script src="http://popcornjs.org/code/dist/popcorn-complete.min.js"></script>
+<script src="scripts/app2.js"></script>
+<script src="//d3js.org/d3.v3.min.js"></script>
+
+
+<style>
+body{
+    background:#6495ED;
+}
+.progress-meter .background{
+    background:#6495ED;
+  fill: white;
+}
+
+.progress-meter .foreground {
+    background:#6495ED;
+  fill: #000;
+}
+
+.progress-meter text {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+    background:#6495ED;
+}
+
+</style>
+
+
+
+
+      
+  </head>
+  <body ng-controller="primerAppController" class="hello">
+  <script src="scripts/app.js"></script>
+<div class="jumbotron">
+    <h1 class="text-center text-sm-center" style=color:white;>
+       Crimenes CD MX
+    </h1>
+    <div class="row">
+    <div class="col-md-2 col-md-offset-5"><div id="video" class="text-center" style="width: 360px; height: 300px;" ></div></div>
+</div>
+     
+    <div class="table-responsive">
+        
+        <table class="table table-sm table-responsive">
+            <thead>
+                <tr>
+                     <th id="hola">Delegacion</th>
+                    <th id="hola">Codigo Postal</th>
+                    <th id="hola">Tipo</th>
+                    <th id="hola">Descripción</th>
+                    <th id="hola">Calle</th>
+                    <th id="hola">Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="item in todo">
+                     <td id="hola">{{item.delegacion}}</td>
+                      <td id="hola">{{item.codigo_postal}}</td>
+                    <td id="hola">{{item.tipo}}</td>
+                     <td id="hola">{{item.descripcion}}</td>
+                    <td id="hola">{{item.calle}}</td>
+                    <td id="hola">{{item.fecha}}</td>
+        
+                </tr>
+               
+            </tbody>
+        </table>
+    </div>
+    <div>
+   <h1> <a href='http://localhost:8080/login/auth' style="color:white;">Iniciar sesion</a></h1>
+    </div>
+    <div>
+    <h1><a href='http://localhost:8080/user/create' style="color:white;">Registrarse</a></h1>
+        
+    </div>
+    </div>
+        <div id="footnotediv"></div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+import todo.Divisa
+
+model {
+	Divisa divisa
+}
+json {
+        hal.links(divisa)
+        descripcion divisa.descripcion
+        calle divisa.calle
+        tipo divisa.tipo
+        codigo_postal divisa.codigo_postal
+        delegacion divisa.delegacion
+        id_usuario divisa.id_usuario
+        id divisa.id
+        fecha divisa.fecha
+        version divisa.version
+}
+

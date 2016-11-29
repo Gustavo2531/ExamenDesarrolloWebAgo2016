@@ -1,0 +1,8 @@
+import todo.Divisa
+
+model {
+	Iterable<Divisa> divisaList
+}
+
+json tmpl.divisa(divisaList ?: [])
+
